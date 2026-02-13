@@ -14,7 +14,6 @@
             overflow-x: hidden;
         }
 
-        /* Disco Background */
         body::before {
             content: "";
             position: fixed;
@@ -46,8 +45,8 @@
             color: #ddd;
         }
 
-        /* Slideshow */
         .slideshow {
+            position: relative;   /* ✅ FIXED */
             width: 320px;
             height: 320px;
             margin: 30px auto;
@@ -84,7 +83,6 @@
             100% { opacity: 0; }
         }
 
-        /* Confetti */
         .confetti {
             position: fixed;
             width: 10px;
@@ -105,10 +103,19 @@
             color: gray;
             font-size: 0.9rem;
         }
+
+        audio {
+            display: none;
+        }
     </style>
 </head>
 
 <body>
+
+    <!-- ✅ MUSIC 😌 -->
+    <audio autoplay loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
 
     <h1>🎉 Happy 24th Birthday UNC 🎉</h1>
 
@@ -134,11 +141,10 @@
     </div>
 
     <footer>
-        Made with sibling love & mild disrespect 😂
+        made by the best child of our parents 😌
     </footer>
 
     <script>
-        /* Confetti Generator */
         for (let i = 0; i < 80; i++) {
             let confetti = document.createElement("div");
             confetti.className = "confetti";
