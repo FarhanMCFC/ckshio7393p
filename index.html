@@ -14,7 +14,6 @@
             overflow: hidden;
         }
 
-        /* FULL SCREEN DISCO BACKGROUND */
         body::before {
             content: "";
             position: fixed;
@@ -36,17 +35,7 @@
             align-items: center;
         }
 
-        .message {
-            font-size: 1.3rem;
-            width: 80%;
-            margin: 20px auto;
-            line-height: 1.6;
-            color: #ddd;
-        }
-
-        /* PERFECT FRAME */
         .slideshow {
-            position: relative;
             width: 380px;
             height: 380px;
             margin: 30px 0;
@@ -54,39 +43,31 @@
             overflow: hidden;
             background: black;
             box-shadow: 0 0 25px rgba(255, 0, 200, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        /* ✅ FIXED IMAGE BEHAVIOR */
+        /* ✅ SINGLE IMAGE = NO GLITCHES */
         .slideshow img {
             width: 100%;
             height: 100%;
-            object-fit: contain;   /* ⭐ THE IMPORTANT FIX */
-            background: black;
-            position: absolute;
-            opacity: 0;
-            animation: slideShow 30s infinite;
+            object-fit: contain;
         }
 
-        .slideshow img:nth-child(1) { animation-delay: 0s; }
-        .slideshow img:nth-child(2) { animation-delay: 3s; }
-        .slideshow img:nth-child(3) { animation-delay: 6s; }
-        .slideshow img:nth-child(4) { animation-delay: 9s; }
-        .slideshow img:nth-child(5) { animation-delay: 12s; }
-        .slideshow img:nth-child(6) { animation-delay: 15s; }
-        .slideshow img:nth-child(7) { animation-delay: 18s; }
-        .slideshow img:nth-child(8) { animation-delay: 21s; }
-        .slideshow img:nth-child(9) { animation-delay: 24s; }
-        .slideshow img:nth-child(10){ animation-delay: 27s; }
-
-        @keyframes slideShow {
-            0% { opacity: 0; }
-            5% { opacity: 1; }
-            10% { opacity: 1; }
-            15% { opacity: 0; }
-            100% { opacity: 0; }
+        .message {
+            font-size: 1.3rem;
+            width: 80%;
+            line-height: 1.6;
+            color: #ddd;
         }
 
-        /* CONFETTI */
+        footer {
+            margin-top: 20px;
+            color: gray;
+            font-size: 0.9rem;
+        }
+
         .confetti {
             position: fixed;
             width: 10px;
@@ -101,13 +82,6 @@
             }
         }
 
-        footer {
-            margin-top: 20px;
-            color: gray;
-            font-size: 0.9rem;
-        }
-
-        /* MUSIC START SCREEN */
         .overlay {
             position: fixed;
             inset: 0;
@@ -115,7 +89,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
             z-index: 10;
         }
 
@@ -130,10 +103,6 @@
             box-shadow: 0 0 20px #ff00cc;
         }
 
-        .button:hover {
-            transform: scale(1.05);
-        }
-
         audio {
             display: none;
         }
@@ -142,12 +111,10 @@
 
 <body>
 
-    <!-- MUSIC -->
     <audio id="music" loop>
         <source src="funk.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- CLICK TO START PARTY -->
     <div class="overlay" id="overlay">
         <button class="button" onclick="startParty()">
             START THE PARTY
@@ -158,16 +125,7 @@
         <h1>Happy 24th Birthday UNC</h1>
 
         <div class="slideshow">
-            <img src="1.jpeg">
-            <img src="2.jpeg">
-            <img src="3.jpeg">
-            <img src="4.jpeg">
-            <img src="5.jpeg">
-            <img src="6.jpeg">
-            <img src="7.jpeg">
-            <img src="8.jpeg">
-            <img src="9.jpeg">
-            <img src="10.jpeg">
+            <img id="slide" src="1.jpeg">
         </div>
 
         <div class="message">
@@ -189,7 +147,21 @@
             document.getElementById("overlay").style.display = "none";
         }
 
-        /* Confetti Generator */
+        /* ✅ STABLE SLIDESHOW */
+        const images = [
+            "1.jpeg","2.jpeg","3.jpeg","4.jpeg","5.jpeg",
+            "6.jpeg","7.jpeg","8.jpeg","9.jpeg","10.jpeg"
+        ];
+
+        let index = 0;
+        const slide = document.getElementById("slide");
+
+        setInterval(() => {
+            index = (index + 1) % images.length;
+            slide.src = images[index];
+        }, 2500);
+
+        /* Confetti */
         for (let i = 0; i < 90; i++) {
             let confetti = document.createElement("div");
             confetti.className = "confetti";
